@@ -1,0 +1,150 @@
+// Waybar configuration for Hyprland - Modern, clean, with subtle animations
+// Save as ~/.config/waybar/config.jsonc
+{
+  // Bar basics
+  "layer": "top",                 // top layer so it stays above windows
+  "exclusive": true,               // reserve space so it doesn't overlap clients
+  "position": "top",             // top bar
+  "height": 24,
+  "margin": "4 4 0 4",           // top/right/bottom/left
+  "spacing": 4,
+  "gtk-layer-shell": true,
+
+  // Global behaviors
+  "reload_style_on_change": true,
+  "cursor": "pointer",
+
+  // Module layout
+  "modules-left": [
+    "hyprland/workspaces",
+    "hyprland/window"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "group/cpu_temp",
+    "custom/memory",
+    "network",
+    "battery",
+    "tray"
+  ],
+
+  // Hyprland workspaces with icons and persistence
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
+    "persistent-workspaces": {
+      "*": 10
+    },
+    "format-icons": {
+      "default": "",
+      "active": "",
+      "urgent": ""
+    }
+  },
+
+  // Active window title
+  "hyprland/window": {
+    "max-length": 80,
+    "separate-outputs": true,
+    "rewrite": {
+      "(.*) — Mozilla Firefox": "$1 󰈹",
+      "(.*) - NeoVim": "$1 ",
+      "(.*) - Visual Studio Code": "$1 󰨞"
+    }
+  },
+
+  // Clock with date
+  "clock": {
+    "format": "{:%a %d %b  %H:%M}",
+    "format-alt": "{:%Y-%m-%d  %H:%M:%S}",
+    "tooltip": true,
+    "tooltip-format": "{:%A, %B %d, %Y}\nWeek %V"
+  },
+
+  // CPU (custom, numeric percentage with label)
+  "custom/cpu": {
+    "exec": "/home/r2unit/.config/waybar/scripts/cpu_usage.sh",
+    "return-type": "json",
+    "interval": 2,
+    "format": "CPU {}",
+    "tooltip": true
+  },
+  "custom/memory": {
+    "exec": "/home/r2unit/.config/waybar/scripts/memory_usage.sh",
+    "return-type": "json",
+    "interval": 2,
+    "format": "Memory {}",
+    "tooltip": true
+  },
+
+  // Group CPU and Temperature into a single pill container
+  "group/cpu_temp": {
+    "orientation": "horizontal",
+    "modules": [ "custom/cpu", "temperature" ]
+  },
+
+  // Temperature (fallback to first thermal zone)
+  "temperature": {
+    "format": "{temperatureC}°C",
+    "critical-threshold": 80,
+    "interval": 2
+  },
+
+  // Network
+  "network": {
+    "interval": 5,
+    "format-wifi": "󰖩  {essid} <i>{ipaddr}</i> ({signalStrength}%)",
+    "format-ethernet": "󰈀  {ifname} <i>{ipaddr}</i>",
+    "format-disconnected": "󰤭  offline",
+    "tooltip": true,
+    "tooltip-format": "{ifname}  {ipaddr}\nUp: {bandwidthUpBits}  Down: {bandwidthDownBits}",
+    "on-click": "/home/r2unit/.config/waybar/scripts/network_details.sh"
+  },
+
+  // Audio
+  "pulseaudio": {
+    "format": "{icon}  {volume}%",
+    "format-bluetooth": "  {volume}%",
+    "format-muted": "󰝟  muted",
+    "on-click": "pavucontrol",
+    "scroll-step": 3,
+    "format-icons": {
+      "headphones": "󰋋",
+      "handsfree": "󰋎",
+      "headset": "󰋎",
+      "default": ["󰕾", "󰖀", "󰕿"]
+    }
+  },
+
+  // Backlight (auto-detect)
+  "backlight": {
+    "format": "󰃠  {percent}%",
+    "on-scroll-up": "brightnessctl set +5%",
+    "on-scroll-down": "brightnessctl set 5%-"
+  },
+
+  // Battery
+  "battery": {
+    "states": {
+      "good": 80,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon}  {capacity}%",
+    "format-charging": "󰂄  {capacity}%",
+    "format-plugged": "󰚥  {capacity}%",
+    "format-alt": "{time}",
+    "interval": 10,
+    "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰂂", "󰁹"]
+  },
+
+  // System tray
+  "tray": {
+    "icon-size": 11,
+    "spacing": 8
+  }
+}
