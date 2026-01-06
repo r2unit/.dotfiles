@@ -2,31 +2,106 @@
   "layer": "top",
   "exclusive": true,
   "position": "top",
-  "height": 24,
-  "margin": "4 4 0 4",
-  "spacing": 4,
+  "height": 18,
+  "margin": "2 2 0 2",
+  "spacing": 1,
   "gtk-layer-shell": true,
   "reload_style_on_change": true,
   "cursor": "pointer",
   "modules-left": ["hyprland/workspaces","hyprland/window"],
   "modules-center": ["clock"],
-  "modules-right": ["group/cpu_temp","custom/memory","pulseaudio","backlight","network","battery","tray"],
+  "modules-right": ["custom/cpu_power","group/cpu_temp","custom/memory","pulseaudio","backlight","network","battery","tray"],
   "hyprland/workspaces": {
-    "format": "{icon}",
+    "format": "{id}",
     "on-click": "activate",
     "on-scroll-up": "hyprctl dispatch workspace e+1",
     "on-scroll-down": "hyprctl dispatch workspace e-1",
     "persistent-workspaces": {"*": 10},
-    "format-icons": {"default": "","active": "","urgent": ""}
+    "show-special": false,
+    "all-outputs": false
   },
   "hyprland/window": {
-    "max-length": 80,
+    "max-length": 60,
     "separate-outputs": true,
     "rewrite": {
-      "(.*) — Mozilla Firefox": "$1 󰈹",
-      "(.*) - NeoVim": "$1 ",
-      "(.*) - Visual Studio Code": "$1 󰨞"
+      "(.*) — Mozilla Firefox": "Firefox: $1",
+      "(.*) - NeoVim": "Vim: $1",
+      "(.*) - Visual Studio Code": "Code: $1"
     }
+  },
+  "clock": {
+    "format": "{:%a %H:%M}",
+    "tooltip": true,
+    "tooltip-format": "{:%A, %B %d, %Y}\nWeek %V"
+  },
+  "custom/cpu_power": {
+    "exec": "/home/r2unit/.config/hypr/waybar/scripts/cpu_power.sh",
+    "return-type": "json",
+    "interval": 2,
+    "format": "{}",
+    "tooltip": true
+  },
+  "custom/cpu": {
+    "exec": "/home/r2unit/.config/hypr/waybar/scripts/cpu_usage.sh",
+    "return-type": "json",
+    "interval": 2,
+    "format": "CPU {}",
+    "tooltip": true
+  },
+  "custom/memory": {
+    "exec": "/home/r2unit/.config/hypr/waybar/scripts/memory_usage.sh",
+    "return-type": "json",
+    "interval": 2,
+    "format": "MEM {}",
+    "tooltip": true
+  },
+  "group/cpu_temp": {
+    "orientation": "horizontal",
+    "modules": ["custom/cpu","temperature"]
+  },
+  "temperature": {
+    "format": "{temperatureC}°C",
+    "critical-threshold": 80,
+    "interval": 2
+  },
+  "network": {
+    "interval": 5,
+    "format-wifi": "{essid} {ipaddr}",
+    "format-ethernet": "{ifname} {ipaddr}",
+    "format-disconnected": "No Connection",
+    "tooltip": true,
+    "tooltip-format": "{ifname} {essid}\n{ipaddr}\n↑ {bandwidthUpBits} ↓ {bandwidthDownBits}",
+    "on-click": "/home/r2unit/.config/hypr/waybar/scripts/network_details.sh"
+  },
+  "pulseaudio": {
+    "format": "VOL {volume}%",
+    "format-bluetooth": "BT {volume}%",
+    "format-muted": "VOL ✕",
+    "on-click": "pavucontrol",
+    "scroll-step": 3
+  },
+  "backlight": {
+    "format": "輝度 {percent}%",
+    "on-scroll-up": "brightnessctl set +5%",
+    "on-scroll-down": "brightnessctl set 5%-"
+  },
+  "battery": {
+    "bat": "BAT0",
+    "states": {
+      "good": 80,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{time}",
+    "format-charging": "⚡ {time} {power}W",
+    "format-plugged": "🔌 Full {power}W",
+    "interval": 10
+  },
+  "tray": {
+    "icon-size": 10,
+    "spacing": 6
+  }
+}
   },
   "clock": {
     "format": "{:%a %d %b  %H:%M}",
@@ -35,14 +110,14 @@
     "tooltip-format": "{:%A, %B %d, %Y}\nWeek %V"
   },
   "custom/cpu": {
-    "exec": "/home/r2unit/.config/waybar/scripts/cpu_usage.sh",
+    "exec": "/home/r2unit/.config/hypr/waybar/scripts/cpu_usage.sh",
     "return-type": "json",
     "interval": 2,
     "format": "CPU {}",
     "tooltip": true
   },
   "custom/memory": {
-    "exec": "/home/r2unit/.config/waybar/scripts/memory_usage.sh",
+    "exec": "/home/r2unit/.config/hypr/waybar/scripts/memory_usage.sh",
     "return-type": "json",
     "interval": 2,
     "format": "Memory {}",
@@ -64,7 +139,7 @@
     "format-disconnected": "󰤭  offline",
     "tooltip": true,
     "tooltip-format": "{ifname}  {ipaddr}\nUp: {bandwidthUpBits}  Down: {bandwidthDownBits}",
-    "on-click": "/home/r2unit/.config/waybar/scripts/network_details.sh"
+    "on-click": "/home/r2unit/.config/hypr/waybar/scripts/network_details.sh"
   },
   "pulseaudio": {
     "format": "{icon}  {volume}%",
@@ -85,6 +160,201 @@
     "on-scroll-down": "brightnessctl set 5%-"
   },
   "battery": {
+    "bat": "BAT0",
+    "states": {
+      "good": 80,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon}  {capacity}%",
+    "format-charging": "󰂄  {capacity}%",
+    "format-plugged": "󰚥  {capacity}%",
+    "format-alt": "{time}",
+    "interval": 10,
+    "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰂂", "󰁹"]
+  },
+  "tray": {
+    "icon-size": 11,
+    "spacing": 8
+  }
+}
+➜  waybar scp config.jsonc
+usage: scp [-346ABCOpqRrsTv] [-c cipher] [-D sftp_server_path] [-F ssh_config]
+           [-i identity_file] [-J destination] [-l limit] [-o ssh_option]
+           [-P port] [-S program] [-X sftp_option] source ... target
+➜  waybar cp config.jsonc
+cp: missing destination file operand after 'config.jsonc'
+Try 'cp --help' for more information.
+➜  waybar cp config.jsonc
+cp: missing destination file operand after 'config.jsonc'
+Try 'cp --help' for more information.
+➜  waybar
+➜  waybar ls
+config.jsonc  launch.sh  scripts  style.css
+➜  waybar cat config.jsonc
+{
+  "layer": "top",
+  "exclusive": true,
+  "position": "top",
+  "height": 18,
+  "margin": "2 2 0 2",
+  "spacing": 1,
+  "gtk-layer-shell": true,
+  "reload_style_on_change": true,
+  "cursor": "pointer",
+  "modules-left": ["hyprland/workspaces","hyprland/window"],
+  "modules-center": ["clock"],
+  "modules-right": ["custom/cpu_power","group/cpu_temp","custom/memory","pulseaudio","backlight","network","battery","tray"],
+  "hyprland/workspaces": {
+    "format": "{id}",
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
+    "persistent-workspaces": {"*": 10},
+    "show-special": false,
+    "all-outputs": false
+  },
+  "hyprland/window": {
+    "max-length": 60,
+    "separate-outputs": true,
+    "rewrite": {
+      "(.*) — Mozilla Firefox": "Firefox: $1",
+      "(.*) - NeoVim": "Vim: $1",
+      "(.*) - Visual Studio Code": "Code: $1"
+    }
+  },
+  "clock": {
+    "format": "{:%a %H:%M}",
+    "tooltip": true,
+    "tooltip-format": "{:%A, %B %d, %Y}\nWeek %V"
+  },
+  "custom/cpu_power": {
+    "exec": "/home/r2unit/.config/hypr/waybar/scripts/cpu_power.sh",
+    "return-type": "json",
+    "interval": 2,
+    "format": "{}",
+    "tooltip": true
+  },
+  "custom/cpu": {
+    "exec": "/home/r2unit/.config/hypr/waybar/scripts/cpu_usage.sh",
+    "return-type": "json",
+    "interval": 2,
+    "format": "CPU {}",
+    "tooltip": true
+  },
+  "custom/memory": {
+    "exec": "/home/r2unit/.config/hypr/waybar/scripts/memory_usage.sh",
+    "return-type": "json",
+    "interval": 2,
+    "format": "MEM {}",
+    "tooltip": true
+  },
+  "group/cpu_temp": {
+    "orientation": "horizontal",
+    "modules": ["custom/cpu","temperature"]
+  },
+  "temperature": {
+    "format": "{temperatureC}°C",
+    "critical-threshold": 80,
+    "interval": 2
+  },
+  "network": {
+    "interval": 5,
+    "format-wifi": "{essid} {ipaddr}",
+    "format-ethernet": "{ifname} {ipaddr}",
+    "format-disconnected": "No Connection",
+    "tooltip": true,
+    "tooltip-format": "{ifname} {essid}\n{ipaddr}\n↑ {bandwidthUpBits} ↓ {bandwidthDownBits}",
+    "on-click": "/home/r2unit/.config/hypr/waybar/scripts/network_details.sh"
+  },
+  "pulseaudio": {
+    "format": "VOL {volume}%",
+    "format-bluetooth": "BT {volume}%",
+    "format-muted": "VOL ✕",
+    "on-click": "pavucontrol",
+    "scroll-step": 3
+  },
+  "backlight": {
+    "format": "輝度 {percent}%",
+    "on-scroll-up": "brightnessctl set +5%",
+    "on-scroll-down": "brightnessctl set 5%-"
+  },
+  "battery": {
+    "bat": "BAT0",
+    "states": {
+      "good": 80,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{time}",
+    "format-charging": "⚡ {time} {power}W",
+    "format-plugged": "🔌 Full {power}W",
+    "interval": 10
+  },
+  "tray": {
+    "icon-size": 10,
+    "spacing": 6
+  }
+}
+  },
+  "clock": {
+    "format": "{:%a %d %b  %H:%M}",
+    "format-alt": "{:%Y-%m-%d  %H:%M:%S}",
+    "tooltip": true,
+    "tooltip-format": "{:%A, %B %d, %Y}\nWeek %V"
+  },
+  "custom/cpu": {
+    "exec": "/home/r2unit/.config/hypr/waybar/scripts/cpu_usage.sh",
+    "return-type": "json",
+    "interval": 2,
+    "format": "CPU {}",
+    "tooltip": true
+  },
+  "custom/memory": {
+    "exec": "/home/r2unit/.config/hypr/waybar/scripts/memory_usage.sh",
+    "return-type": "json",
+    "interval": 2,
+    "format": "Memory {}",
+    "tooltip": true
+  },
+  "group/cpu_temp": {
+    "orientation": "horizontal",
+    "modules": ["custom/cpu","temperature"]
+  },
+  "temperature": {
+    "format": "{temperatureC}°C",
+    "critical-threshold": 80,
+    "interval": 2
+  },
+  "network": {
+    "interval": 5,
+    "format-wifi": "󰖩  {essid} <i>{ipaddr}</i> ({signalStrength}%)",
+    "format-ethernet": "󰈀  {ifname} <i>{ipaddr}</i>",
+    "format-disconnected": "󰤭  offline",
+    "tooltip": true,
+    "tooltip-format": "{ifname}  {ipaddr}\nUp: {bandwidthUpBits}  Down: {bandwidthDownBits}",
+    "on-click": "/home/r2unit/.config/hypr/waybar/scripts/network_details.sh"
+  },
+  "pulseaudio": {
+    "format": "{icon}  {volume}%",
+    "format-bluetooth": "  {volume}%",
+    "format-muted": "󰝟  muted",
+    "on-click": "pavucontrol",
+    "scroll-step": 3,
+    "format-icons": {
+      "headphones": "󰋋",
+      "handsfree": "󰋎",
+      "headset": "󰋎",
+      "default": ["󰕾", "󰖀", "󰕿"]
+    }
+  },
+  "backlight": {
+    "format": "󰃠  {percent}%",
+    "on-scroll-up": "brightnessctl set +5%",
+    "on-scroll-down": "brightnessctl set 5%-"
+  },
+  "battery": {
+    "bat": "BAT0",
     "states": {
       "good": 80,
       "warning": 30,
