@@ -1,0 +1,11 @@
+{
+  "pythonVersion": "3.11",
+  "typeCheckingMode": "basic",
+  "useLibraryCodeForTypes": true,
+  "reportMissingImports": true,
+  "reportMissingTypeStubs": false,
+  "diagnosticMode": "openFilesOnly",
+  "stubPath": "typings",
+  "venvPath": ".",
+  "venv": ".venv"
+}

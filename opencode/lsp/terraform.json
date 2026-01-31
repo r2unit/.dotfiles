@@ -1,0 +1,15 @@
+{
+  "command": "terraform-ls",
+  "args": ["serve"],
+  "settings": {
+    "terraform": {
+      "validation": {
+        "enableEnhancedValidation": true
+      },
+      "experimentalFeatures": {
+        "validateOnSave": true,
+        "prefillRequiredFields": true
+      }
+    }
+  }
+}

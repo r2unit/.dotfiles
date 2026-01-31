@@ -1,0 +1,17 @@
+{
+  "command": "gopls",
+  "args": ["serve"],
+  "settings": {
+    "gopls": {
+      "analyses": {
+        "unusedparams": true,
+        "shadow": true
+      },
+      "staticcheck": true,
+      "gofumpt": true,
+      "usePlaceholders": true,
+      "completeUnimported": true,
+      "deepCompletion": true
+    }
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "layer": "top",
+  "exclusive": true,
+  "position": "top",
+  "height": 18,
+  "margin": "2 2 0 2",
+  "spacing": 1,
+  "gtk-layer-shell": true,
+  "reload_style_on_change": true,
+  "cursor": "pointer",
+  "modules-left": ["hyprland/workspaces","hyprland/window"],
+  "modules-center": ["clock"],
+  "modules-right": ["custom/cpu_power","group/cpu_temp","custom/memory","pulseaudio","backlight","network","battery","tray"],
+  "hyprland/workspaces": {
+    "format": "{id}",
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
+    "persistent-workspaces": {"desc:Samsung Electric Company LC32G5xT H4ZNB00268": 10},
+    "show-special": false,
+    "all-outputs": false
+  },
+  "hyprland/window": {
+    "max-length": 60,
+    "separate-outputs": true,
+    "rewrite": {
+      "(.*) — Mozilla Firefox": "Firefox: $1",
+      "(.*) - NeoVim": "Vim: $1",
+      "(.*) - Visual Studio Code": "Code: $1"
+    }
+  },
+  "clock": {
+    "format": "{:%a %H:%M}",
+    "tooltip": true,
+    "tooltip-format": "{:%A, %B %d, %Y}\nWeek %V"
+  },
+  "custom/cpu_power": {
+    "exec": "/home/r2unit/.config/hypr/waybar/scripts/cpu_power.sh",
+    "return-type": "json",
+    "interval": 2,
+    "format": "{}",
+    "tooltip": true
+  },
+  "custom/cpu": {
+    "exec": "/home/r2unit/.config/hypr/waybar/scripts/cpu_usage.sh",
+    "return-type": "json",
+    "interval": 2,
+    "format": "CPU {}",
+    "tooltip": true
+  },
+  "custom/memory": {
+    "exec": "/home/r2unit/.config/hypr/waybar/scripts/memory_usage.sh",
+    "return-type": "json",
+    "interval": 2,
+    "format": "MEM {}",
+    "tooltip": true
+  },
+  "group/cpu_temp": {
+    "orientation": "horizontal",
+    "modules": ["custom/cpu","temperature"]
+  },
+  "temperature": {
+    "format": "{temperatureC}°C",
+    "critical-threshold": 80,
+    "interval": 2
+  },
+  "network": {
+    "interval": 5,
+    "format-wifi": "{essid} {ipaddr}",
+    "format-ethernet": "{ifname} {ipaddr}",
+    "format-disconnected": "No Connection",
+    "tooltip": true,
+    "tooltip-format": "{ifname} {essid}\n{ipaddr}\n↑ {bandwidthUpBits} ↓ {bandwidthDownBits}",
+    "on-click": "/home/r2unit/.config/hypr/waybar/scripts/network_details.sh"
+  },
+  "pulseaudio": {
+    "format": "VOL {volume}%",
+    "format-bluetooth": "BT {volume}%",
+    "format-muted": "VOL X",
+    "on-click": "pavucontrol",
+    "scroll-step": 3
+  },
+  "backlight": {
+    "format": "BRI {percent}%",
+    "on-scroll-up": "brightnessctl set +5%",
+    "on-scroll-down": "brightnessctl set 5%-"
+  },
+  "battery": {
+    "bat": "BAT0",
+    "states": {
+      "good": 80,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{time}",
+    "format-charging": "CHG {time} {power}W",
+    "format-plugged": "FULL {power}W",
+    "interval": 10
+  },
+  "tray": {
+    "icon-size": 10,
+    "spacing": 6
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "python": {
+    "command": "pylsp",
+    "args": []
+  },
+  "go": {
+    "command": "gopls",
+    "args": ["serve"]
+  },
+  "rust": {
+    "command": "rust-analyzer",
+    "args": []
+  },
+  "c": {
+    "command": "clangd",
+    "args": ["--background-index"]
+  },
+  "cpp": {
+    "command": "clangd",
+    "args": ["--background-index"]
+  },
+  "typescript": {
+    "command": "typescript-language-server",
+    "args": ["--stdio"]
+  },
+  "javascript": {
+    "command": "typescript-language-server",
+    "args": ["--stdio"]
+  },
+  "zig": {
+    "command": "zls",
+    "args": []
+  },
+  "terraform": {
+    "command": "terraform-ls",
+    "args": ["serve"]
+  }
+}

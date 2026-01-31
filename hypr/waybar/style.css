@@ -1,0 +1,226 @@
+* {
+    font-family: "Noto Sans CJK JP", "JetBrains Mono", "Font Awesome 6 Free", sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+window#waybar {
+    background: transparent;
+}
+
+/* Terminal-style base modules */
+#workspaces, #clock, #cpu, #custom-cpu, #custom-cpu_power, #memory, #custom-memory, #temperature, #network, #pulseaudio, #backlight, #battery, #tray, #custom-rightpad, #custom-leftpad, #window {
+    background: linear-gradient(135deg, rgba(18, 18, 18, 0.85) 0%, rgba(26, 26, 26, 0.80) 100%);
+    color: #ff9f43;
+    border: 1px solid rgba(255, 159, 67, 0.30);
+    border-radius: 2px;
+    padding: 2px 6px;
+    margin: 0 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 159, 67, 0.1);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+#window {
+    min-width: 120px;
+    color: #ffa94d;
+    border-color: rgba(255, 169, 77, 0.25);
+    font-weight: 600;
+}
+
+.modules-left, .modules-center, .modules-right {
+    padding: 0 2px;
+}
+
+/* Workspace indicators - terminal style */
+#workspaces {
+    background: linear-gradient(135deg, rgba(18, 18, 18, 0.85) 0%, rgba(26, 26, 26, 0.80) 100%);
+    border: 1px solid rgba(255, 159, 67, 0.30);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 159, 67, 0.1);
+    padding: 1px 4px;
+    margin: 0 2px;
+}
+
+#workspaces button {
+    color: rgba(255, 159, 67, 0.4);
+    font-size: 8px;
+    font-weight: 600;
+    font-family: "JetBrains Mono", "Noto Sans CJK JP", sans-serif;
+    background: rgba(255, 159, 67, 0.05);
+    border: 1px solid rgba(255, 159, 67, 0.15);
+    border-radius: 1px;
+    padding: 1px 4px;
+    margin: 0 1px;
+    min-width: 16px;
+    min-height: 12px;
+    transition: all 150ms ease;
+}
+
+#workspaces button:hover {
+    background: linear-gradient(135deg, rgba(255, 159, 67, 0.15) 0%, rgba(255, 107, 0, 0.12) 100%);
+    border-color: rgba(255, 159, 67, 0.5);
+    color: #ffa94d;
+    box-shadow: 0 0 8px rgba(255, 159, 67, 0.3), inset 0 0 4px rgba(255, 159, 67, 0.2);
+}
+
+#workspaces button.occupied {
+    color: #ff9f43;
+    background: rgba(255, 159, 67, 0.1);
+    border-color: rgba(255, 159, 67, 0.3);
+}
+
+#workspaces button.active {
+    font-weight: 900;
+    background: linear-gradient(135deg, #ff9f43 0%, #ff6b00 100%);
+    border-color: #ffa94d;
+    color: #0a0a0a;
+    box-shadow: 0 0 12px rgba(255, 159, 67, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 200, 100, 0.4);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+#workspaces button.urgent {
+    background: linear-gradient(135deg, #ff4757 0%, #ff6b81 100%);
+    border-color: #ff6b81;
+    color: #0a0a0a;
+    animation: urgent-blink 1s ease-in-out infinite;
+}
+
+@keyframes urgent-blink {
+    0% { opacity: 1; box-shadow: 0 0 12px rgba(255, 71, 87, 0.8); }
+    50% { opacity: 0.7; box-shadow: 0 0 6px rgba(255, 71, 87, 0.4); }
+    100% { opacity: 1; box-shadow: 0 0 12px rgba(255, 71, 87, 0.8); }
+}
+
+/* State colors - terminal palette */
+#pulseaudio.muted { 
+    color: #636e72;
+    border-color: rgba(99, 110, 114, 0.3);
+}
+#battery.good { 
+    color: #00d2d3;
+    border-color: rgba(0, 210, 211, 0.3);
+}
+#battery.warning { 
+    color: #fdcb6e;
+    border-color: rgba(253, 203, 110, 0.3);
+}
+#battery.critical { 
+    color: #ff4757;
+    border-color: rgba(255, 71, 87, 0.5);
+    animation: critical-pulse 1.5s ease-in-out infinite;
+}
+#network.disconnected { 
+    color: #ff4757;
+    border-color: rgba(255, 71, 87, 0.5);
+    background: linear-gradient(135deg, rgba(255, 71, 87, 0.15) 0%, rgba(255, 71, 87, 0.10) 100%);
+    font-weight: 600;
+}
+
+@keyframes critical-pulse {
+    0% { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 0 0 rgba(255, 71, 87, 0.7); }
+    50% { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 0 4px rgba(255, 71, 87, 0); }
+    100% { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 0 0 rgba(255, 71, 87, 0.7); }
+}
+
+/* Hover effects - terminal glow */
+#workspaces:hover, #clock:hover, #cpu:hover, #custom-cpu:hover, #custom-cpu_power:hover, #memory:hover, #custom-memory:hover, #temperature:hover, #network:hover, #pulseaudio:hover, #backlight:hover, #battery:hover, #tray:hover, #window:hover {
+    border-color: rgba(255, 159, 67, 0.6);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 0 16px rgba(255, 159, 67, 0.25), inset 0 1px 0 rgba(255, 159, 67, 0.2);
+}
+
+#tray {
+    padding-right: 8px;
+}
+#tray > .passive { opacity: 0.5; }
+#tray > .active { opacity: 1.0; }
+
+/* Clock - terminal timestamp style */
+#clock {
+    color: #ff9f43;
+    font-weight: 600;
+    border-color: rgba(255, 159, 67, 0.35);
+    background: linear-gradient(135deg, rgba(18, 18, 18, 0.90) 0%, rgba(26, 26, 26, 0.85) 100%);
+    letter-spacing: 0.5px;
+}
+
+#clock:hover {
+    color: #ffa94d;
+    border-color: rgba(255, 159, 67, 0.6);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 159, 67, 0.3), inset 0 -2px 0 0 rgba(255, 159, 67, 0.4);
+}
+
+/* Temperature critical state */
+#temperature.critical {
+    background: linear-gradient(135deg, rgba(255, 71, 87, 0.25) 0%, rgba(255, 107, 129, 0.20) 100%);
+    color: #ff6b81;
+    border-color: rgba(255, 71, 87, 0.5);
+    animation: temp-critical 2s ease-in-out infinite;
+}
+
+@keyframes temp-critical {
+    0% { border-color: rgba(255, 71, 87, 0.5); box-shadow: 0 0 8px rgba(255, 71, 87, 0.4); }
+    50% { border-color: rgba(255, 71, 87, 0.8); box-shadow: 0 0 16px rgba(255, 71, 87, 0.6); }
+    100% { border-color: rgba(255, 71, 87, 0.5); box-shadow: 0 0 8px rgba(255, 71, 87, 0.4); }
+}
+
+/* CPU module - terminal style */
+#custom-cpu {
+    color: #ff9f43;
+}
+
+#custom-cpu_power {
+    color: #ff9f43;
+    font-weight: 600;
+}
+
+/* Memory module - terminal style */
+#custom-memory {
+    color: #ff9f43;
+}
+
+/* CPU temperature group - terminal panel style */
+#group-cpu_temp {
+    background: linear-gradient(135deg, rgba(18, 18, 18, 0.85) 0%, rgba(26, 26, 26, 0.80) 100%);
+    color: #ff9f43;
+    border: 1px solid rgba(255, 159, 67, 0.30);
+    border-radius: 2px;
+    padding: 3px 6px;
+    margin: 0 3px;
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 159, 67, 0.1);
+}
+
+#group-cpu_temp:hover {
+    border-color: rgba(255, 159, 67, 0.6);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 0 16px rgba(255, 159, 67, 0.25), inset 0 1px 0 rgba(255, 159, 67, 0.2);
+}
+
+#group-cpu_temp > #custom-cpu,
+#group-cpu_temp > #temperature {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0 6px;
+    margin: 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+#group-cpu_temp > #temperature {
+    border-left: 1px solid rgba(255, 159, 67, 0.25);
+    margin-left: 6px;
+    padding-left: 10px;
+}
+
+#group-cpu_temp > #temperature.critical {
+    background: transparent;
+    color: #ff6b81;
+    animation: temp-text-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes temp-text-pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}

@@ -1,0 +1,19 @@
+CompileFlags:
+  Add:
+    - "-std=c17"
+    - "-Wall"
+    - "-Wextra"
+  CompilationDatabase: build/
+
+Diagnostics:
+  ClangTidy:
+    Add:
+      - bugprone-*
+      - performance-*
+      - readability-*
+    Remove:
+      - readability-magic-numbers
+      - readability-uppercase-literal-suffix
+
+Index:
+  Background: Build

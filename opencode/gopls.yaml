@@ -1,0 +1,26 @@
+build.buildFlags: []
+build.env: {}
+build.directoryFilters:
+  - "-node_modules"
+  - "-vendor"
+
+formatting.gofumpt: true
+formatting.local: ""
+
+ui.completion.usePlaceholders: true
+ui.completion.completionBudget: "100ms"
+ui.diagnostic.analyses:
+  shadow: true
+  unusedparams: true
+  unusedwrite: true
+  useany: true
+
+ui.semanticTokens: true
+ui.codelenses:
+  gc_details: false
+  generate: true
+  regenerate_cgo: true
+  test: true
+  tidy: true
+  upgrade_dependency: true
+  vendor: true

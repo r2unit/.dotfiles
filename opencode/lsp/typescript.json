@@ -1,0 +1,30 @@
+{
+  "command": "typescript-language-server",
+  "args": ["--stdio"],
+  "settings": {
+    "typescript": {
+      "suggest": {
+        "completeFunctionCalls": true
+      },
+      "inlayHints": {
+        "includeInlayParameterNameHints": "all",
+        "includeInlayFunctionParameterTypeHints": true,
+        "includeInlayVariableTypeHints": true,
+        "includeInlayPropertyDeclarationTypeHints": true,
+        "includeInlayFunctionLikeReturnTypeHints": true
+      }
+    },
+    "javascript": {
+      "suggest": {
+        "completeFunctionCalls": true
+      },
+      "inlayHints": {
+        "includeInlayParameterNameHints": "all",
+        "includeInlayFunctionParameterTypeHints": true,
+        "includeInlayVariableTypeHints": true,
+        "includeInlayPropertyDeclarationTypeHints": true,
+        "includeInlayFunctionLikeReturnTypeHints": true
+      }
+    }
+  }
+}
