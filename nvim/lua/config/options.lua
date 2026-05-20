@@ -1,56 +1,34 @@
--- General options
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.cursorline = true
-vim.opt.cursorcolumn = false
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
--- Tabs and indentation
-vim.opt.expandtab = true
-vim.opt.shiftwidth = 2
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.autoindent = true
-vim.opt.smartindent = true
+local opt = vim.opt
 
--- Search
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.hlsearch = true
-vim.opt.incsearch = true
+opt.number = true
+opt.relativenumber = true
 
--- Display
-vim.opt.wrap = true
-vim.opt.breakindent = true
-vim.opt.termguicolors = true
-vim.opt.background = "dark"
-vim.opt.pumheight = 10
-vim.opt.pumblend = 10
-vim.opt.winblend = 0
-vim.opt.scrolloff = 8
-vim.opt.sidescrolloff = 8
+opt.tabstop = 4
+opt.softtabstop = 4
+opt.shiftwidth = 4
+opt.expandtab = true
 
--- Behavior
-vim.opt.mouse = "a"
-vim.opt.clipboard = "unnamedplus"
-vim.opt.undofile = true
-vim.opt.backup = false
-vim.opt.swapfile = false
-vim.opt.completeopt = "menu,menuone,noselect"
-vim.opt.confirm = true
-vim.opt.showmode = false
-vim.opt.virtualedit = "block"
-vim.opt.inccommand = "split"
+opt.smartindent = true
 
--- Appearance
-vim.opt.signcolumn = "yes"
-vim.opt.splitbelow = true
-vim.opt.splitright = true
-vim.opt.list = true
-vim.opt.listchars = { tab = "  ", trail = ".", nbsp = "%" }
+opt.wrap = false
 
--- Performance
-vim.opt.updatetime = 200
-vim.opt.timeoutlen = 300
+opt.swapfile = false
+opt.backup = false
+opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+opt.undofile = true
 
--- Clear search highlight on pressing Escape
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
+opt.hlsearch = false
+opt.incsearch = true
+
+opt.termguicolors = true
+
+opt.scrolloff = 8
+opt.signcolumn = "yes"
+opt.isfname:append("@-@")
+
+opt.updatetime = 50
+
+opt.colorcolumn = "80"

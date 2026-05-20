@@ -39,7 +39,8 @@
     "return-type": "json",
     "interval": 2,
     "format": "{}",
-    "tooltip": true
+    "tooltip": true,
+    "on-click": "/home/r2unit/.config/hypr/waybar/scripts/cpu_cores_popup.sh"
   },
   "custom/cpu": {
     "exec": "/home/r2unit/.config/hypr/waybar/scripts/cpu_usage.sh",

@@ -70,6 +70,16 @@ Good tasks:
 6. **Update** - Mark tasks complete as you finish them
 7. **Verify** - Confirm each task is done before moving to the next
 
+### Sub-Agent Delegation
+
+- Each planned task from the todo list MUST be delegated to a sub-agent for execution
+- Use the Task tool to spawn a sub-agent for every individual task
+- Provide the sub-agent with a clear, detailed prompt describing exactly what needs to be done
+- Include relevant context (file paths, patterns, constraints) so the sub-agent can work autonomously
+- Launch multiple independent sub-agents in parallel when tasks have no dependencies between them
+- Wait for dependent tasks to complete before spawning sub-agents that rely on their output
+- Review the sub-agent's result before marking the task as complete
+
 ### Task Management Rules
 
 - Start every new request by calling `todowrite` with your task breakdown
@@ -121,23 +131,22 @@ Good tasks:
 - If code needs a comment to be understood, first try to refactor it to be clearer
 - ONLY add comments when a function is genuinely complicated and cannot be simplified further
 - When you do add comments:
-  - Write them in Dutch
-  - Start with `<lorenzo>` so we know it's from the agent
+  - Write them in English
   - Keep them short, simple, and human - just a quick clarification
   - Explain what it does or what it relates to, nothing more
-  - Example: `// <lorenzo> haalt gebruiker op uit cache, valt terug op database`
+  - Example: `// fetches user from cache, falls back to database`
 - Do not add JSDoc, docstrings, or inline documentation
 - The only other exception is legally required comments (licenses, attributions) or existing comments that must be preserved
 
 ### TODO Comments Policy
 
 - Only add TODO comments when marking something for future feature implementation
-- Write TODOs in Dutch, short and simple
+- Write TODOs in English, short and simple
 - No `<lorenzo>` prefix needed for TODOs
 - Only use TODOs for planned features, not for bugs, tech debt, or "nice to haves"
 - Keep them actionable and specific
-- Example: `// TODO: voeg rate limiting toe wanneer auth module klaar is`
-- Example: `// TODO: uitbreiden met webhook support in v2`
+- Example: `// TODO: add rate limiting when auth module is ready`
+- Example: `// TODO: extend with webhook support in v2`
 - Do not add TODOs for things that should be done now - just do them
 - Do not add vague TODOs like "fix this later" or "clean up"
 
@@ -184,7 +193,7 @@ Good tasks:
 - NEVER list "key changes" or "what was done" at the end of a task - just do the task and stop
 - NEVER update, create, or modify README files unless explicitly requested
 - NEVER add summary comments at the end of files
-- NEVER add verbose comments or documentation - only short Dutch clarifications for complex functions when absolutely necessary
+- NEVER add verbose comments or documentation - only short English clarifications for complex functions when absolutely necessary
 - NEVER push to main, master, development, devel, or develop branches
 - Focus solely on implementing the requested functionality
 - When a task is complete, stop - do not provide a recap or overview of changes made

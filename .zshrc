@@ -105,8 +105,24 @@ source $ZSH/oh-my-zsh.sh
 
 # opencode
 export PATH=/home/r2unit/.opencode/bin:$PATH
-export OPENCODE_EXPERIMENTAL_LSP_TOOL=true
-alias waybar='waybar -c ~/.config/hypr/waybar/config.jsonc -s ~/.config/hypr/waybar/style.css'
+
+# vpn quanza aliases
+alias vpn-up='sudo vpn quanza up'
+alias vpn-down='sudo vpn quanza down'
+alias vpn-status='vpn quanza status'
+alias vpn-logs='sudo vpn quanza logs'
+alias vpn-restart='sudo vpn quanza restart'
+
+# vpn ferox aliases
+alias ferox-up='sudo vpn ferox up'
+alias ferox-down='sudo vpn ferox down'
+alias ferox-status='vpn ferox status'
+alias ferox-logs='sudo vpn ferox logs'
+alias ferox-restart='sudo vpn ferox restart'
+
+# hyprsync completions
+fpath=(/home/r2unit/.local/share/zsh/site-functions $fpath)
+autoload -Uz compinit && compinit
 
 # bun completions
 [ -s "/home/r2unit/.bun/_bun" ] && source "/home/r2unit/.bun/_bun"
@@ -114,20 +130,3 @@ alias waybar='waybar -c ~/.config/hypr/waybar/config.jsonc -s ~/.config/hypr/way
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-
-# go
-export PATH="$HOME/go/bin:$PATH"
-
-vpn() {
-    case "$1" in
-        quanza)
-            case "$2" in
-                up) sudo swanctl --initiate --child qdips-child ;;
-                down) sudo swanctl --terminate --ike qdips-vpn ;;
-                *) echo "usage: vpn quanza [up|down]" ;;
-            esac
-            ;;
-        status) sudo swanctl --list-sas ;;
-        *) echo "usage: vpn [quanza up|quanza down|status]" ;;
-    esac
-}

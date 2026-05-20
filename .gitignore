@@ -15,3 +15,7 @@ id_ed25519
 # GPG keys
 *.gpg
 *.asc
+
+# Backup files
+*.bak
+*.bak.*

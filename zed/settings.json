@@ -7,6 +7,52 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "project_panel": {
+    "dock": "left"
+  },
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "agent": {
+    "dock": "right",
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "git_panel": {
+    "dock": "left"
+  },
+  "ssh_connections": [
+    {
+      "host": "quanza-lab-lorenzok",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/home"
+          ]
+        },
+        {
+          "paths": [
+            "/root/projects/otap-playbooks"
+          ]
+        }
+      ]
+    },
+    {
+      "host": "outpost",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/root/projects/nerdpitch"
+          ]
+        }
+      ]
+    }
+  ],
   "git": {
     "inline_blame": {
       "show_commit_summary": true
@@ -19,13 +65,13 @@
   "icon_theme": {
     "mode": "dark",
     "light": "Zed (Default)",
-    "dark": "Catppuccin Macchiato"
+    "dark": "Catppuccin Latte"
   },
   "ui_font_size": 16,
   "buffer_font_size": 15,
   "theme": {
     "mode": "dark",
     "light": "One Light",
-    "dark": "Ayu Dark",
+    "dark": "Matte Black",
   },
 }
